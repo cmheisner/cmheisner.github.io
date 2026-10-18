@@ -1,0 +1,36 @@
+---
+import Section from "./Section.astro";
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../data/projects";
+
+const oss = projects.filter((p) => p.category === "oss");
+const personal = projects.filter((p) => p.category === "personal");
+---
+
+<Section id="projects" title="Projects" eyebrow="04">
+  <div class="space-y-12">
+    <div>
+      <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        Open source
+      </h3>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {oss.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+    <div>
+      <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        Personal projects
+      </h3>
+      <p class="mb-4 text-sm text-slate-500">
+        Source for these lives in private repos — reach out if you'd like a closer look.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {personal.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

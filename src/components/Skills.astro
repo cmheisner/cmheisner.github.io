@@ -1,0 +1,23 @@
+---
+import Section from "./Section.astro";
+import { skills } from "../data/resume";
+
+const groups = Object.entries(skills);
+---
+
+<Section id="skills" title="Skills" eyebrow="03">
+  <div class="grid gap-6 sm:grid-cols-2">
+    {groups.map(([group, items]) => (
+      <div>
+        <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">{group}</h3>
+        <div class="flex flex-wrap gap-2">
+          {items.map((item) => (
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-sm text-slate-300">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,32 @@
+---
+import Section from "./Section.astro";
+
+const links = [
+  { label: "GitHub", href: "https://github.com/cmheisner" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/curtis-heisner-89443287" },
+  { label: "curtis.heisner.88@gmail.com", href: "mailto:curtis.heisner.88@gmail.com" },
+];
+---
+
+<Section id="contact" title="Contact" eyebrow="05">
+  <p class="mb-6 text-slate-300">
+    Open to talking shop about test architecture, AI tooling, or anything else on this page.
+  </p>
+  <ul class="space-y-2">
+    {links.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          target={link.href.startsWith("http") ? "_blank" : undefined}
+          rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+          class="font-mono text-emerald-400 underline-offset-4 hover:underline"
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Section>
+<footer class="border-t border-slate-800 py-8 text-center text-xs text-slate-600">
+  Built with Astro · Hosted on GitHub Pages
+</footer>
