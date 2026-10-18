@@ -41,3 +41,17 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## 🖼️ Adding project previews
+
+1. Drop images into `src/assets/projects/<slug>/` (png, jpg, webp, or gif). Astro resizes and converts them at build time.
+2. In `src/data/projects.ts`, add them to that project:
+
+   ```ts
+   screenshots: [
+     { file: "mech/hangar.png", alt: "Mech hangar screen", caption: "Loadout editor" },
+   ],
+   demoUrl: "https://claude.ai/...", // optional live demo; must be publicly shared
+   ```
+
+The first screenshot becomes the cover on the Showcase, project cards, and social previews. Set `featured: true` to show a project on the home page. If a referenced file is missing, the build fails with an error that names it.

@@ -2,10 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
-import Experience from "../components/Experience.astro";
-import Skills from "../components/Skills.astro";
-import Projects from "../components/Projects.astro";
+import Section from "../components/Section.astro";
+import ShowcaseTile from "../components/ShowcaseTile.astro";
 import Contact from "../components/Contact.astro";
+import { projects } from "../data/projects";
+
+const featured = projects.filter((p) => p.featured).slice(0, 3);
 ---
 
 <Layout
@@ -13,11 +15,16 @@ import Contact from "../components/Contact.astro";
   description="Portfolio and resume for Curtis Heisner, Software Engineer in Test: QA automation platforms, AI tooling, and personal projects."
 >
   <Hero />
-  <main>
-    <About />
-    <Experience />
-    <Skills />
-    <Projects />
-    <Contact />
-  </main>
+  <About />
+  {featured.length > 0 && (
+    <Section id="featured" title="Featured work">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((project) => <ShowcaseTile project={project} />)}
+      </div>
+      <a href="/showcase/" class="mt-6 inline-block font-mono text-sm text-emerald-400 hover:underline">
+        see the full showcase →
+      </a>
+    </Section>
+  )}
+  <Contact />
 </Layout>

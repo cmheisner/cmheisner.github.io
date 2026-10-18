@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+import type { Project } from "../data/projects";
+import { getScreenshots } from "../data/screenshots";
+
+interface Props {
+  project: Project;
+  sizes?: string;
+  class?: string;
+}
+
+const { project, sizes = "(min-width: 768px) 50vw, 100vw", class: className } = Astro.props;
+const cover = getScreenshots(project)[0];
+const initials = project.name
+  .split(/[\s\-_]+|(?=[A-Z][a-z])/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w) => w[0].toUpperCase())
+  .join("");
+---
+
+<div class:list={["relative aspect-video overflow-hidden bg-slate-900", className]}>
+  {cover ? (
+    <Image
+      src={cover.image}
+      alt={cover.alt}
+      widths={[480, 960, 1440]}
+      sizes={sizes}
+      class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+    />
+  ) : (
+    <div class="flex h-full w-full flex-col items-center justify-center gap-2 bg-[radial-gradient(ellipse_at_top_left,_rgba(16,185,129,0.18),_transparent_65%)]">
+      <span class="font-mono text-4xl font-bold text-slate-700 group-hover:text-emerald-500/50">{initials}</span>
+      <span class="font-mono text-xs text-slate-600">preview coming soon</span>
+    </div>
+  )}
+</div>

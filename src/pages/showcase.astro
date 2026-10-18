@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import ShowcaseTile from "../components/ShowcaseTile.astro";
+import { projects } from "../data/projects";
+import { hasPreview } from "../data/screenshots";
+
+const withPreviews = projects.filter(hasPreview);
+const comingSoon = projects.filter((p) => !hasPreview(p));
+---
+
+<Layout
+  title="Showcase — Curtis Heisner"
+  description="Screenshots and live demos of projects built by Curtis Heisner."
+>
+  <Section id="showcase" title="Showcase">
+    <p class="-mt-4 mb-8 max-w-2xl text-slate-400">
+      A visual look at things I've built — screenshots, and live demos where they exist.
+    </p>
+    {withPreviews.length > 0 ? (
+      <div class="grid gap-6 sm:grid-cols-2">
+        {withPreviews.map((project) => <ShowcaseTile project={project} />)}
+      </div>
+    ) : (
+      <p class="rounded-lg border border-dashed border-slate-700 p-8 text-center text-slate-500">
+        Previews are on the way — check back soon.
+      </p>
+    )}
+    {comingSoon.length > 0 && (
+      <div class="mt-12">
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">
+          Previews coming soon
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {comingSoon.map((project) => (
+            <a
+              href={`/projects/${project.slug}/`}
+              class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300 hover:border-emerald-500 hover:text-emerald-400"
+            >
+              {project.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </Section>
+</Layout>
