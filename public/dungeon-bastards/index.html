@@ -8,8 +8,8 @@
   <title>Dungeon Bastards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=VT323&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-CbuKHJiw.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DwlC3M-n.css">
+  <script type="module" crossorigin src="./assets/index-w2R3-zda.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CjSdUDZG.css">
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -52,6 +52,17 @@
     <form id="chat-form" hidden><input id="chat-input" placeholder="Say something (Enter)" autocomplete="off" enterkeyhint="send" /></form>
   </div>
   <div id="bigtext"></div>
+  <div id="downed" hidden></div>
+  <section id="gameover" hidden>
+    <h1>GAME OVER</h1>
+    <p class="sub">Everybody's dead.</p>
+    <div class="row">
+      <button id="go-restart" class="big">Start over</button>
+      <button id="go-results">See results</button>
+      <button id="go-haunt">Keep haunting</button>
+    </div>
+    <p id="go-wait" class="sub"></p>
+  </section>
   <div id="overlay" hidden><h1></h1><p class="quote"></p><p class="sub"></p></div>
 
   <button id="music" title="Toggle menu music" hidden></button>
@@ -105,12 +116,10 @@
     </div>
     <p id="error" class="error"></p>
     <div class="help">
-      <b>WASD</b> move · <b>Mouse</b> aim · <b>Left click</b> attack · <b>Right click / Space</b> ability · <b>Q</b> go full bastard · <b>M</b> music on/off · <b>Esc / P</b> pause (your stats, skill tree and the codex) · <b>Enter / T</b> chat<br />
-      <b>E / middle click</b> cast hex · <b>R / wheel / 1–3</b> pick a hex · <b>X / side mouse button</b> cast utility spell · <b>Z / 4–6</b> pick a utility spell · <b>F</b> drink potion · <b>G</b> pick a potion<br />
-      <b>V</b> use: pick up a downed crewmate (hold), carry heavy loot, levers, vents, bells, snitch boxes, lockers (hold to break in), pay a debt, gift-wrap your potion · <b>C</b> dirty trick on a crewmate<br />
-      Phone: left thumb move · right thumb aim + attack · <b>SKILL</b> ability · <b>USE</b> / <b>DIRTY</b> · swipe the spell strip to pick (hexes, then utility), hold <b>CAST</b> and drag to aim, let go to cast (or tap the picked spell) · potion buttons by the left stick · <b>FULL BASTARD</b> when the meter's full · <b>❚❚</b> pause (music toggle in there) · tap the <b>Chat</b> box to talk<br />
-      Gamepad: left stick move · right stick aim · <b>RT</b> attack · <b>LT / A / hold RB</b> ability · <b>tap RB</b> cast hex · <b>d-pad →</b> switch hex · <b>LB</b> cast utility · <b>d-pad ←</b> switch utility · <b>d-pad ↓</b> drink potion · <b>d-pad ↑</b> switch potion · <b>X</b> use · <b>B</b> drop what you're hauling · <b>L3 / R3</b> dirty trick · <b>Y</b> full bastard · <b>Start</b> pause · <b>Back</b> chat (<b>↑↓</b> letter, <b>→</b> next, <b>←</b> delete, <b>A</b> send, <b>B</b> cancel)<br />
-      Gamepad menus: <b>d-pad / left stick</b> move · <b>A</b> select · <b>Start</b> big red button · <b>A</b> on a text box to type: <b>↑↓</b> letter, <b>→</b> next, <b>←</b> delete, <b>A</b> done
+      <p><b>Keyboard</b> WASD move · mouse aim · click attack · right-click ability · <b>F</b> drink potion · <b>V</b> use · <b>Esc</b> pause</p>
+      <p><b>Controller</b> sticks move + aim · RT attack · LT ability · <b>d-pad ▼</b> drink potion · <b>X</b> use · <b>Start</b> pause</p>
+      <p><b>Phone</b> left thumb move · right thumb aim + attack · potion buttons sit above the left stick</p>
+      <p>Every control is listed in the pause menu under <b>How to Play</b>.</p>
     </div>
   </section>
 
@@ -121,15 +130,12 @@
     <div class="chars" id="lobby-chars"></div>
     <button id="start" class="big">Break in</button>
     <p id="lobby-wait" class="sub"></p>
-    <div class="help">
-      Friendly fire is always on. Loot only counts if <b>you</b> carry it out the <b style="color:#ff3a3a">EXIT</b>.<br />
-      Screwing your crew over for your own gain (stealing, snatching bodies, baiting monsters, dirty tricks, fake gifts) fills your <b>Bastard meter</b>. Plain fighting doesn't count. Full meter: press <b>Q</b> to go full bastard.<br />
-      Go down and your crew has 12 seconds to pick you up (and you'll owe them). Die and you come back as a ghost. Kill a living bastard as a ghost and you steal their body.<br />
-      The lift has one seat fewer than your crew. Ride it together for a bonus. Escape without hurting anyone for another.<br />
-      Everyone has a vice and a secret contract. Rats fit through vents, goblins blow vaults, kangaroos kick boulders. The exit door takes two.<br />
-      Stash gold, cursed loot, potions or scrolls in a <b>locker</b>: if anybody gets out, the crew goes a floor deeper and your locker comes too. Crewmates can crack it open, loudly. Rig it.<br />
-      Spells cost mana and can <b>fizzle</b> (less as you level). Grab tomes to learn more. Scrolls never fizzle. Potions are potions. Gutter Sugar is a mistake.
-    </div>
+    <ul class="help brief">
+      <li>Only loot <b>you</b> carry out the <b style="color:#ff3a3a">lift</b> counts. It has one seat fewer than the crew.</li>
+      <li>Friendly fire is on. Screwing over your crew fills your <b>Bastard meter</b>.</li>
+      <li>Go down and you have 12 seconds: a crewmate picks you up, or you drink a <b style="color:#e03030">Potion of Not Dying</b>.</li>
+      <li>Die and you come back as a ghost. Kill someone living to steal their body.</li>
+    </ul>
   </section>
 
   <section id="end" class="screen" hidden>
