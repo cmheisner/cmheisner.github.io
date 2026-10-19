@@ -57,6 +57,18 @@ export const projects: Project[] = [
 
   // Personal (private repos, described without a repo link)
   {
+    name: "Dungeon Bastards",
+    slug: "dungeon-bastards",
+    featured: true,
+    description:
+      "Browser multiplayer roguelite crime-crawl: steal weird loot, betray your crew, die ugly. PS1-style low-poly 3D for 1–4 players.",
+    tags: ["TypeScript", "Three.js", "WebRTC"],
+    category: "personal",
+    details:
+      "Hit Start a crew and send the room code to up to three friends. There's no game server: the host's browser runs the whole dungeon in a Web Worker, and everybody else connects to it peer-to-peer over WebRTC. Keyboard and mouse, gamepad and touch all work.",
+    demoUrl: "/dungeon-bastards/",
+  },
+  {
     name: "voice-soundboard",
     slug: "voice-soundboard",
     description:

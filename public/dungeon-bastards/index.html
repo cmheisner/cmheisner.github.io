@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#07050a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Dungeon Bastards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=VT323&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-CbuKHJiw.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DwlC3M-n.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="plates"></div>
+  <div id="flash"></div>
+
+  <div id="hud" hidden>
+    <div id="hud-info"></div>
+    <div id="hud-crew"></div>
+    <div id="hud-top"></div>
+    <div id="hud-low">
+      <div id="hud-bag" hidden></div>
+      <div id="hud-mid">
+        <div id="hud-hints"></div>
+        <div id="hud-me"></div>
+      </div>
+    </div>
+  </div>
+  <div id="touch" hidden>
+    <div class="stick move"><i></i></div>
+    <div class="stick aim"><i></i></div>
+    <button id="touch-abl" data-btn="abl">SKILL</button>
+    <button id="touch-cast" data-btn="cast">CAST</button>
+    <div id="touch-spells" hidden><div class="track"></div></div>
+    <div id="touch-pots"></div>
+    <button id="touch-ult" data-btn="ult">FULL<br />BASTARD</button>
+    <button id="touch-use" data-btn="use">USE</button>
+    <button id="touch-dirty" data-btn="dirty">DIRTY</button>
+    <button id="touch-roll" data-btn="roll" hidden>ROLL</button>
+  </div>
+  <div id="feed"></div>
+  <div id="log" hidden>
+    <div class="tabs">
+      <button data-tab="log" class="on">Log</button>
+      <button data-tab="chat">Chat <b id="chat-unread"></b></button>
+      <button id="log-min" class="min" title="Tuck the box away">–</button>
+    </div>
+    <div id="log-lines" class="lines"></div>
+    <div id="chat-lines" class="lines chat" hidden></div>
+    <form id="chat-form" hidden><input id="chat-input" placeholder="Say something (Enter)" autocomplete="off" enterkeyhint="send" /></form>
+  </div>
+  <div id="bigtext"></div>
+  <div id="overlay" hidden><h1></h1><p class="quote"></p><p class="sub"></p></div>
+
+  <button id="music" title="Toggle menu music" hidden></button>
+  <button id="pause-btn" title="Pause (Esc / P / Start)" hidden>❚❚</button>
+
+  <section id="pause" hidden>
+    <div class="pause-head">
+      <h1 class="logo small">Paused</h1>
+      <p id="pause-by" class="sub"></p>
+    </div>
+    <nav id="pause-tabs">
+      <button data-tab="bastard" class="on">Your Bastard</button>
+      <button data-tab="skills">Skills <b id="pause-sp"></b></button>
+      <button data-tab="codex">Codex</button>
+      <button data-tab="howto">How to Play</button>
+    </nav>
+    <div id="pause-body"></div>
+    <div class="row">
+      <button id="resume" class="big">Get back in there</button>
+      <button id="pause-music"></button>
+      <button id="pause-leave">Leave the crew</button>
+    </div>
+    <p id="pause-foot" class="sub">The whole dungeon is frozen for everyone. Anyone can resume.</p>
+  </section>
+
+  <section id="shop" hidden>
+    <h2 id="shop-name"></h2>
+    <p id="shop-greet" class="sub"></p>
+    <div id="shop-purse"></div>
+    <div id="shop-body"></div>
+    <button id="shop-close">Walk away (V / B)</button>
+  </section>
+
+  <section id="locker" hidden>
+    <h2>Your locker</h2>
+    <p class="sub">Whatever's in here comes down to the next floor with you, even if you die. Anybody can break in.</p>
+    <div id="locker-body"></div>
+    <button id="locker-close">Close (V / B)</button>
+  </section>
+
+  <section id="title" class="screen">
+    <h1 class="logo">Dungeon Bastards</h1>
+    <p class="tag">Steal weird shit. Betray your crew. Die ugly.</p>
+    <label>Your bastard name <input id="name" maxlength="16" placeholder="Rick" autocomplete="off" /></label>
+    <div class="chars" id="title-chars"></div>
+    <div class="row">
+      <button id="create" class="big">Start a crew</button>
+      <span class="or">or</span>
+      <input id="code" maxlength="4" placeholder="CODE" autocomplete="off" />
+      <button id="join">Join</button>
+    </div>
+    <p id="error" class="error"></p>
+    <div class="help">
+      <b>WASD</b> move · <b>Mouse</b> aim · <b>Left click</b> attack · <b>Right click / Space</b> ability · <b>Q</b> go full bastard · <b>M</b> music on/off · <b>Esc / P</b> pause (your stats, skill tree and the codex) · <b>Enter / T</b> chat<br />
+      <b>E / middle click</b> cast hex · <b>R / wheel / 1–3</b> pick a hex · <b>X / side mouse button</b> cast utility spell · <b>Z / 4–6</b> pick a utility spell · <b>F</b> drink potion · <b>G</b> pick a potion<br />
+      <b>V</b> use: pick up a downed crewmate (hold), carry heavy loot, levers, vents, bells, snitch boxes, lockers (hold to break in), pay a debt, gift-wrap your potion · <b>C</b> dirty trick on a crewmate<br />
+      Phone: left thumb move · right thumb aim + attack · <b>SKILL</b> ability · <b>USE</b> / <b>DIRTY</b> · swipe the spell strip to pick (hexes, then utility), hold <b>CAST</b> and drag to aim, let go to cast (or tap the picked spell) · potion buttons by the left stick · <b>FULL BASTARD</b> when the meter's full · <b>❚❚</b> pause (music toggle in there) · tap the <b>Chat</b> box to talk<br />
+      Gamepad: left stick move · right stick aim · <b>RT</b> attack · <b>LT / A / hold RB</b> ability · <b>tap RB</b> cast hex · <b>d-pad →</b> switch hex · <b>LB</b> cast utility · <b>d-pad ←</b> switch utility · <b>d-pad ↓</b> drink potion · <b>d-pad ↑</b> switch potion · <b>X</b> use · <b>B</b> drop what you're hauling · <b>L3 / R3</b> dirty trick · <b>Y</b> full bastard · <b>Start</b> pause · <b>Back</b> chat (<b>↑↓</b> letter, <b>→</b> next, <b>←</b> delete, <b>A</b> send, <b>B</b> cancel)<br />
+      Gamepad menus: <b>d-pad / left stick</b> move · <b>A</b> select · <b>Start</b> big red button · <b>A</b> on a text box to type: <b>↑↓</b> letter, <b>→</b> next, <b>←</b> delete, <b>A</b> done
+    </div>
+  </section>
+
+  <section id="lobby" class="screen" hidden>
+    <h1 class="logo small">Dungeon Bastards</h1>
+    <div class="code-box">Room <b id="lobby-code"></b> <button id="copy">Copy invite link</button></div>
+    <ul id="lobby-players"></ul>
+    <div class="chars" id="lobby-chars"></div>
+    <button id="start" class="big">Break in</button>
+    <p id="lobby-wait" class="sub"></p>
+    <div class="help">
+      Friendly fire is always on. Loot only counts if <b>you</b> carry it out the <b style="color:#ff3a3a">EXIT</b>.<br />
+      Screwing your crew over for your own gain (stealing, snatching bodies, baiting monsters, dirty tricks, fake gifts) fills your <b>Bastard meter</b>. Plain fighting doesn't count. Full meter: press <b>Q</b> to go full bastard.<br />
+      Go down and your crew has 12 seconds to pick you up (and you'll owe them). Die and you come back as a ghost. Kill a living bastard as a ghost and you steal their body.<br />
+      The lift has one seat fewer than your crew. Ride it together for a bonus. Escape without hurting anyone for another.<br />
+      Everyone has a vice and a secret contract. Rats fit through vents, goblins blow vaults, kangaroos kick boulders. The exit door takes two.<br />
+      Stash gold, cursed loot, potions or scrolls in a <b>locker</b>: if anybody gets out, the crew goes a floor deeper and your locker comes too. Crewmates can crack it open, loudly. Rig it.<br />
+      Spells cost mana and can <b>fizzle</b> (less as you level). Grab tomes to learn more. Scrolls never fizzle. Potions are potions. Gutter Sugar is a mistake.
+    </div>
+  </section>
+
+  <section id="end" class="screen" hidden>
+    <h1 id="end-headline" class="logo"></h1>
+    <table id="end-table"></table>
+    <div class="chars" id="end-chars"></div>
+    <div class="row">
+      <button id="again" class="big">Run it back</button>
+      <button id="restart" hidden>Start over</button>
+      <button id="leave">Leave</button>
+    </div>
+    <p id="end-wait" class="sub"></p>
+  </section>
+
+</body>
+</html>
