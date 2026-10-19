@@ -49,29 +49,9 @@ export const projects: Project[] = [
     name: "deckyLoader-timestamp",
     slug: "deckyloader-timestamp",
     description:
-      "Small Decky Loader plugin utility for Steam Deck, built with TypeScript against the plugin SDK.",
+      "Decky Loader plugin for Steam Deck that toggles a timestamp overlay on and off the screen.",
     tags: ["TypeScript", "Decky Loader"],
     url: "https://github.com/cmheisner/deckyLoader-timestamp",
-    category: "oss",
-  },
-  {
-    name: "decky-plugin-database",
-    slug: "decky-plugin-database",
-    description:
-      "Contribution to a Decky Loader plugin adding a floating microphone bubble for speech-to-text input over any screen.",
-    tags: ["Shell", "Decky Loader"],
-    url: "https://github.com/cmheisner/decky-plugin-database",
-    status: "fork",
-    category: "oss",
-  },
-  {
-    name: "gKnight",
-    slug: "gknight",
-    description:
-      "Early JavaScript game project — archived, kept around as a record of where things started.",
-    tags: ["JavaScript"],
-    url: "https://github.com/cmheisner/gKnight",
-    status: "archived",
     category: "oss",
   },
 
@@ -132,13 +112,6 @@ export const projects: Project[] = [
     description:
       "Simple web app for tracking vehicle maintenance history and upcoming service reminders.",
     tags: ["HTML", "JavaScript", "Python"],
-    category: "personal",
-  },
-  {
-    name: "journey",
-    slug: "journey",
-    description: "Web-based text adventure game, built as a lightweight narrative engine.",
-    tags: ["JavaScript", "HTML/CSS"],
     category: "personal",
   },
   {
