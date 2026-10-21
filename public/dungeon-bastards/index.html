@@ -8,8 +8,8 @@
   <title>Dungeon Bastards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=VT323&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-Bikf8QRd.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Czz9WYWQ.css">
+  <script type="module" crossorigin src="./assets/index-D0sL05FS.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-hKvvN2zK.css">
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -20,6 +20,7 @@
     <div id="hud-info"></div>
     <div id="hud-crew"></div>
     <div id="hud-top"></div>
+    <div id="hud-boss" hidden></div>
     <div id="hud-low">
       <div id="hud-bag" hidden></div>
       <div id="hud-mid">
@@ -33,7 +34,9 @@
     <div class="stick aim"><i></i></div>
     <button id="touch-abl" data-btn="abl">SKILL</button>
     <button id="touch-cast" data-btn="cast">CAST</button>
-    <div id="touch-spells" hidden><div class="track"></div></div>
+    <div id="touch-spells" class="strip" data-strip="spells" hidden><div class="track"></div><i class="chev l">‹</i><i class="chev r">›</i></div>
+    <div id="touch-potstrip" class="strip" data-strip="pots" hidden><div class="track"></div><i class="chev l">‹</i><i class="chev r">›</i></div>
+    <button id="touch-drink" data-btn="drink" hidden>DRINK</button>
     <div id="touch-pots"></div>
     <button id="touch-ult" data-btn="ult">FULL<br />BASTARD</button>
     <button id="touch-use" data-btn="use">USE</button>
