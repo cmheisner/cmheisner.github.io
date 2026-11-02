@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#06070a" />
+  <title>Blade Proto</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-_iINcXoG.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-9aQpTwfe.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="hud">
+    <div class="bar hp"><i></i><b></b></div>
+    <div class="bar st"><i></i><b></b></div>
+    <div class="bar mp" hidden><i></i><b></b><u></u></div>
+  </div>
+  <div id="choke"></div>
+  <div id="lock"></div>
+  <div id="reticle"><i></i><i></i><i></i><i></i></div>
+  <div id="quiver" hidden></div>
+  <div id="pace" hidden>Slow walk</div>
+  <div id="combat" hidden></div>
+  <div id="skill" hidden></div>
+  <div id="skills" hidden></div>
+  <div id="wave" hidden></div>
+  <div id="banner"></div>
+  <div id="debug" hidden></div>
+  <div id="start" class="loading">
+    <h1>Blade Proto</h1>
+    <div id="load">
+      <div class="progress"><i></i></div>
+      <p id="loadnow">Loading the game's scripts…</p>
+      <ol id="loadlog"></ol>
+    </div>
+    <div id="menu">
+      <p id="prompt">Press any key to begin</p>
+      <button id="showcontrols" type="button">Controls</button>
+      <div id="coopmenu"><button id="coophost" type="button">Host co-op</button> <button id="coopjoin" type="button">Join co-op</button></div>
+    </div>
+  </div>
+  <div id="controls" hidden>
+    <div class="panel">
+      <h2>Controls</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>Keyboard &amp; mouse</th><th>Controller</th></tr></thead>
+          <tr><td>Move / camera</td><td>WASD · mouse</td><td>LS · RS</td></tr>
+          <tr><td>Roll (tap) · sprint (hold)</td><td>Alt (tap) · Shift (hold)</td><td>B</td></tr>
+          <tr><td>Light attack · held swing (tap: light, hold: medium, hold longer: heavy)</td><td>LMB (tap · hold)</td><td>RB · RT</td></tr>
+          <tr><td>Parry · guard (the mouse: press to parry, keep holding to guard)</td><td>RMB</td><td>LT · LB</td></tr>
+          <tr><td>Melee (again: sword ↔ dagger) · bow · staff · throwables · torch ↔ shield (each again puts it away)</td><td>1 · 2 · 3 · 4 · 5</td><td>D-pad right · up · up · down · left</td></tr>
+          <tr><td>Put everything away · draw again</td><td>X</td><td>D-pad up (hold)</td></tr>
+          <tr><td>Bow: raise · draw (hold) and loose (let go)</td><td>RMB · LMB</td><td>LB / LT · RB / RT</td></tr>
+          <tr><td>Next arrow · next throwable · pick one from the radial</td><td>wheel · wheel · hold Z + move the mouse</td><td>D-pad down (hold) · D-pad down · LB + RS</td></tr>
+                <tr><td>Staff: turn the orb to a spell · cast at what you point at · on yourself</td><td>hold Z + mouse · LMB · G</td><td>LB + RS · RT · RB</td></tr>
+          <tr><td>Staff: hold the cast for a stronger spell (more magicka) · aim at the floor to hit everyone round it</td><td>hold LMB / G</td><td>hold RT / RB</td></tr>
+          <tr><td>Staff: swap the orb (destruction ↔ travel: blink, mark &amp; recall, telekinesis, open, levitate)</td><td>wheel</td><td>LB + D-pad down</td></tr>
+          <tr><td>Levitate: leap (hold for higher, let go to go) · hover (+ jump held: rise) · drift down</td><td>hold Space · hold LMB · hold G</td><td>hold A · hold RT · hold RB</td></tr>
+          <tr><td>Throwables out: aim · throw · set a satchel down</td><td>RMB · LMB · G</td><td>LT · RT · RB</td></tr>
+          <tr><td>Quick-throw a fire bottle (at the crosshair, or whoever you're locked onto)</td><td>B</td><td>View</td></tr>
+          <tr><td>At a satchel: light its fuse (torch out) · take it back up</td><td>E</td><td>Y</td></tr>
+          <tr><td>At the forge or the tavern hearth: tend it (stoked up, or lit again if it's gone out) · put it out</td><td>E · hold E</td><td>Y · hold Y</td></tr>
+          <tr><td>Pick a locked chest: Use beside it; swing the pick · tension · stop</td><td>E · A/D · LMB (hold) · Alt</td><td>Y · LS · RT · B</td></tr>
+          <tr><td>Torch: raise it</td><td>F (hold)</td><td>LB</td></tr>
+          <tr><td>Shield (strapped on): guard behind it</td><td>RMB</td><td>LB</td></tr>
+          <tr><td>Dagger: take down the unwary · throw (aim with RMB)</td><td>LMB, up close · LMB while aiming</td><td>RB, up close · RT</td></tr>
+          <tr><td>Locked on: thrust · backhand · overhead · forehand</td><td>W · A · S · D + LMB</td><td>LS + RB</td></tr>
+          <tr><td>Riposte (after a parry) · backstab</td><td>LMB, up close</td><td>RB, up close</td></tr>
+          <tr><td>Drink from a vial, gulp by gulp till you're whole or it's dry; again (or anything else) to stop (mana first, if a limb's gone, a bone's broken or acid's scarred you)</td><td>R</td><td>X</td></tr>
+          <tr><td>Kick (breaks a guard or a shield)</td><td>Q</td><td>LS forward + RB</td></tr>
+          <tr><td>Lock on</td><td>middle click</td><td>R3</td></tr>
+          <tr><td>Jump / vault / climb · crouch · pick up / throw</td><td>Space · C · E</td><td>A · L3 · Y</td></tr>
+          <tr><td>On a rope: climb up · slide down</td><td>LMB · RMB (hold)</td><td>RB · LB (hold)</td></tr>
+          <tr><td>Gestures (wave, the finger, sit on the floor, lean on a wall...): hold, pick from the wheel, let go</td><td>Z (hold) + mouse</td><td>LB (hold, hands empty) + RS</td></tr>
+          <tr><td>Talk to someone you're facing: speak aloud (push to talk) · type a line instead</td><td>V (hold) · Enter</td><td>Y (hold) · </td></tr>
+          <tr><td>Combat stance: lowered → Souls → Mordhau</td><td>Tab</td><td>Menu</td></tr>
+          <tr><td>Walk (hold) · slow walk (toggle)</td><td>Alt (hold) · Caps Lock</td><td>LS, lightly</td></tr>
+          <tr><td>Falling from high up: plunge</td><td>LMB in the air</td><td>RB in the air</td></tr>
+          <tr><td>Combat rules: Souls ↔ Mordhau (aim swings with the right stick)</td><td>F4</td><td></td></tr>
+          <tr><td>Debug · slow-mo · freeze</td><td>F1 · F2 · F3</td><td></td></tr>
+        </table>
+      </div>
+      <button id="hidecontrols" type="button">Back</button>
+    </div>
+  </div>
+</body>
+</html>

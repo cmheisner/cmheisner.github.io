@@ -69,6 +69,18 @@ export const projects: Project[] = [
     demoUrl: "/dungeon-bastards/",
   },
   {
+    name: "Blade Proto",
+    slug: "blade-proto",
+    featured: true,
+    description:
+      "Third-person melee prototype in the browser: Souls-style controls, Blade of Darkness-style dismemberment, a bow, a staff of spells, a town to sneak through. Co-op for two.",
+    tags: ["TypeScript", "Three.js", "Rapier", "WebRTC"],
+    category: "personal",
+    details:
+      "Every swing is a blade swept against the bones it meets, so limbs come off where they're cut. Fight waves in the arena, practise in the training hall, sneak past guards in the keep. Keyboard and mouse or a gamepad. For co-op, press Host co-op on the start screen and send your friend the code or link: your browser runs the fight, and theirs connects to it peer-to-peer over WebRTC. (The townsfolk's AI conversation needs a local server, so on this page they stay quiet.)",
+    demoUrl: "/blade-proto/",
+  },
+  {
     name: "voice-soundboard",
     slug: "voice-soundboard",
     description:
