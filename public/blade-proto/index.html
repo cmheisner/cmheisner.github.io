@@ -7,10 +7,9 @@
   <title>Blade Proto</title>
   <link rel="icon" href="data:," />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-DFuBwUeU.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/preload-helper-CRzLMJPS.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-D0dpwzTA.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-CmoTKIny.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D3yYNvPG.css">
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -41,8 +40,9 @@
     <div id="menu">
       <p id="prompt">Press any key to begin</p>
       <button id="play" type="button" class="picked">Play</button>
-      <div id="menubuttons"><button id="showcontrols" type="button">Controls</button> <button id="showplaces" type="button">Places</button> <button id="endit" type="button" hidden>End it</button></div>
+      <div id="menubuttons"><button id="showcontrols" type="button">Controls</button> <button id="showplaces" type="button">Places</button> <button id="newgame" type="button">New game</button> <button id="endit" type="button" hidden>End it</button></div>
       <div id="coopmenu"><button id="coophost" type="button">Host co-op</button> <button id="coopjoin" type="button">Join co-op</button></div>
+      <div id="coopinvite" hidden><p>Your code: <b id="invitecode"></b><br><span id="invitelink"></span></p><button id="copylink" type="button">Copy link</button> <button id="copycode" type="button">Copy code</button></div>
       <div id="mindnote" hidden><p></p><button id="mindask" type="button" hidden>Let them talk</button></div>
     </div>
   </div>
@@ -65,9 +65,10 @@
           <tr><td>Light attack · held swing (tap: light, hold: medium, hold longer: heavy)</td><td>LMB (tap · hold)</td><td>RB · RT</td></tr>
           <tr><td>Parry · guard (the mouse: press to parry, keep holding to guard)</td><td>RMB</td><td>LT · LB</td></tr>
           <tr><td>Melee (again: sword ↔ dagger) · bow · staff · throwables · torch ↔ shield (each again puts it away)</td><td>1 · 2 · 3 · 4 · 5</td><td>D-pad right · up · up · down · left</td></tr>
-          <tr><td>Put everything away · draw again</td><td>X</td><td>D-pad up (hold)</td></tr>
+          <tr><td>Put everything away · draw again</td><td>X</td><td>D-pad down (hold, then let go)</td></tr>
+          <tr><td>Empty one hand: the left (torch, shield, bow) · the right (blade, staff)</td><td></td><td>D-pad left (hold) · D-pad right (hold)</td></tr>
           <tr><td>Bow: raise · draw (hold) and loose (let go)</td><td>RMB · LMB</td><td>LB / LT · RB / RT</td></tr>
-          <tr><td>Next arrow · next throwable · pick one from the radial</td><td>wheel · wheel · hold Z + move the mouse</td><td>D-pad down (hold) · D-pad down · LB + RS</td></tr>
+          <tr><td>Next arrow · next throwable · pick one from the radial</td><td>wheel · wheel · hold Z + move the mouse</td><td>LB + RS · D-pad down · LB + RS</td></tr>
                 <tr><td>Staff: turn the orb to a spell · cast at what you point at · on yourself</td><td>hold Z + mouse · LMB · G</td><td>LB + RS · RT · RB</td></tr>
           <tr><td>Staff: hold the cast for a stronger spell (more magicka) · aim at the floor to hit everyone round it</td><td>hold LMB / G</td><td>hold RT / RB</td></tr>
           <tr><td>Staff: swap the orb on round (destruction → travel: blink, mark &amp; recall, telekinesis, open, levitate → restoration) · or straight to destruction · travel · restoration</td><td>wheel</td><td>LB + D-pad down · LB + D-pad up · right · left</td></tr>
@@ -93,13 +94,13 @@
           <tr><td>The menu (pause) · on it: pick · press · back</td><td>Esc · mouse</td><td>View (hold) · LS / D-pad · A · B</td></tr>
           <tr><td>Walk (hold) · slow walk (toggle)</td><td>Alt (hold) · Caps Lock</td><td>LS, lightly</td></tr>
           <tr><td>Falling from high up: plunge</td><td>LMB in the air</td><td>RB in the air</td></tr>
-          <tr><td>Combat rules: Souls ↔ Mordhau (aim swings with the right stick, or flick the mouse then click, held to come harder; wheel up stabs, down's an overhead; the Mordhau stance aims at a part of them with the mouse (from Souls: hold a mouse thumb button); middle click: tap for the next target, hold to let go)</td><td>F4</td><td></td></tr>
+          <tr><td>Combat rules: Souls ↔ Mordhau (aim swings with the right stick, or flick the mouse then click, held to come harder; wheel up stabs, down's an overhead; the Mordhau stance aims at a part of them with the mouse (from Souls: hold a mouse thumb button); middle click: tap for the next target, hold to let go)</td><td>Ctrl, to the Mordhau stance</td><td>Menu, to the Mordhau stance</td></tr>
           <tr><td>Debug · slow-mo · freeze</td><td>F1 · F2 · F3</td><td></td></tr>
         </table>
       </div>
       <button id="hidecontrols" type="button">Back</button>
     </div>
   </div>
-  </div>
+  </div>
 </body>
 </html>
