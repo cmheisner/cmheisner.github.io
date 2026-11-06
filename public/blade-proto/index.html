@@ -7,8 +7,8 @@
   <title>Blade Proto</title>
   <link rel="icon" href="data:," />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-xEMXy4ir.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-B97eCqyz.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-N2y5hfcx.css">
 </head>
 <body>
@@ -40,7 +40,7 @@
     <div id="menu">
       <p id="prompt">Press any key to begin</p>
       <button id="play" type="button" class="picked">Play</button>
-      <div id="menubuttons"><button id="showcontrols" type="button">Controls</button> <button id="showplaces" type="button">Places</button> <button id="newgame" type="button">New game</button> <button id="endit" type="button" hidden>End it</button></div>
+      <div id="menubuttons"><button id="showcontrols" type="button">Controls</button> <button id="showplaces" type="button">Places</button> <button id="rules" type="button" title="The rules melee goes by: Mordhau (swings aimed by the right stick or the mouse, short aimed parries, feints) or Souls (a combo off one button, charged heavies, a held guard)">Combat: Mordhau</button> <button id="newgame" type="button">New game</button> <button id="endit" type="button" hidden>End it</button></div>
       <div id="coopmenu"><button id="coophost" type="button">Host co-op</button> <button id="coopjoin" type="button">Join co-op</button></div>
       <div id="coopinvite" hidden><p>Your code: <b id="invitecode"></b><br><span id="invitelink"></span></p><button id="copylink" type="button">Copy link</button> <button id="copycode" type="button">Copy code</button></div>
       <div id="mindnote" hidden><p></p><button id="mindask" type="button" hidden>Let them talk</button></div>
@@ -90,17 +90,17 @@
           <tr><td>On a rope: climb up · slide down</td><td>LMB · RMB (hold)</td><td>RB · LB (hold)</td></tr>
           <tr><td>Gestures (wave, the finger, sit on the floor, lean on a wall...): hold, pick from the wheel, let go</td><td>Z (hold) + mouse</td><td>LB (hold, hands empty) + RS</td></tr>
           <tr><td>Talk to someone you're facing: speak aloud (push to talk) · type a line instead</td><td>V (hold) · Enter</td><td>Y (hold) · </td></tr>
-          <tr><td>Combat stance: lowered → Souls → Mordhau</td><td>Ctrl</td><td>Menu</td></tr>
+          <tr><td>Weapon up · lowered (it comes down by itself a few seconds out of a fight; any attack brings it up)</td><td>Ctrl</td><td>Menu</td></tr>
           <tr><td>The menu (pause) · on it: pick · press · back</td><td>Esc · mouse</td><td>View · LS / D-pad · A · B</td></tr>
           <tr><td>Walk (hold) · slow walk (toggle)</td><td>Alt (hold) · Caps Lock</td><td>LS, lightly</td></tr>
           <tr><td>Falling from high up: plunge</td><td>LMB in the air</td><td>RB in the air</td></tr>
-          <tr><td>Combat rules: Souls ↔ Mordhau (aim swings with the right stick, or flick the mouse then click, held to come harder; wheel up stabs, down's an overhead; the Mordhau stance aims at a part of them with the mouse (from Souls: hold a mouse thumb button); middle click: tap for the next target, hold to let go)</td><td>Ctrl, to the Mordhau stance</td><td>Menu, to the Mordhau stance</td></tr>
+          <tr><td>Combat rules: Mordhau ↔ Souls (Mordhau: aim swings with the right stick, or flick the mouse then click, held to come harder; wheel up stabs, down's an overhead; the mouse aims at a part of them (from Souls: hold a mouse thumb button); middle click: tap for the next target, hold to let go)</td><td colspan="2">The menu: Combat button</td></tr>
           <tr><td>Debug · slow-mo · freeze</td><td>F1 · F2 · F3</td><td></td></tr>
         </table>
       </div>
       <button id="hidecontrols" type="button">Back</button>
     </div>
   </div>
-  </div>
+  </div>
 </body>
 </html>
