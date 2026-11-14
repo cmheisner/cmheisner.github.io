@@ -4836,13 +4836,13 @@ uniform float glareR;
 		float wxS = wxOpen * wxUp * clamp( ( wxSnow * 1.7 - wxNz ) * 4.0, 0.0, 1.0 );
 		float wxF = wxOpen * wxFrost * ( 0.1 + 0.9 * wxUp ) * ( 0.5 + 0.5 * cloudNoise( wxP.xz * 40.0 ) );
 		float wxW = wxOpen * wxWet * ( 0.35 + 0.65 * wxUp ) * ( 1.0 - wxS ), wxPud = wxW * wxW * wxUp * smoothstep( 0.6, 0.68, cloudNoise( wxP.xz * 0.45 ) * 0.75 + cloudNoise( wxP.xz * 2.5 ) * 0.25 );
-		float wxD = wxOpen * wxDew * wxUp * ( 1.0 - wxS );
+		float wxD = wxOpen * wxDew * wxUp * ( 1.0 - wxS ) * smoothstep( 0.5, 0.75, cloudNoise( wxP.xz * 14.0 ) * 0.6 + cloudNoise( wxP.xz * 37.0 ) * 0.4 + 0.1 );
 		diffuseColor.rgb *= 1.0 - 0.4 * wxW;
 		diffuseColor.rgb = mix( diffuseColor.rgb, vec3( 0.74, 0.8, 0.88 ), wxF * 0.3 );
 		diffuseColor.rgb = mix( diffuseColor.rgb, vec3( 0.9, 0.92, 0.97 ), wxS );
 	#ifdef STANDARD
 		roughnessFactor = mix( roughnessFactor, 0.85, wxS );
-		roughnessFactor = min( roughnessFactor, mix( 1.0, 0.45, max( wxW, wxD * 0.8 ) ) );
+		roughnessFactor = min( roughnessFactor, mix( 1.0, 0.45, max( wxW, wxD * 0.5 ) ) );
 		roughnessFactor = mix( roughnessFactor, 0.06, wxPud );
 		metalnessFactor *= 1.0 - wxS;
 	#endif
